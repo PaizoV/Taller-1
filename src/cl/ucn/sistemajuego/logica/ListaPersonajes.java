@@ -7,10 +7,10 @@ public class ListaPersonajes {
 	private int cantPersonajes;
 	private int max;
 	
-	public ListaPersonajes(int max) {
+	public ListaPersonajes() {
+		max = 155;
 		lista = new Personaje[max];
 		cantPersonajes = 0;
-		this.max = max;
 	}
 	
 	public int getCantPersonajes() {

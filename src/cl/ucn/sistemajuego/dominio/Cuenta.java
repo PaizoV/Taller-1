@@ -21,6 +21,8 @@ public class Cuenta {
 		this.nivel = nivel;
 		this.rp = rp;
 		this.region = region;
+		personajes = new ListaPersonajes();
+		skins = new ListaSkins(1000);
 		estaBloqueado = false;
 	}
 
