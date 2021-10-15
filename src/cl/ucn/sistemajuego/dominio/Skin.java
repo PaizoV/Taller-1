@@ -34,5 +34,10 @@ public class Skin {
 	public void setPrecio(int precio) {
 		this.precio = precio;
 	}
+
+	@Override
+	public String toString() {
+		return "Nombre: " + nombre + ", Calidad: " + calidad + ", Precio: " + precio + " RP";
+	}
 	
 }
