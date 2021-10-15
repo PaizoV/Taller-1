@@ -37,7 +37,7 @@ public class Skin {
 
 	@Override
 	public String toString() {
-		return "Nombre: " + nombre + ", Calidad: " + calidad + ", Precio: " + precio + " RP";
+		return "Nombre: " + nombre + ", calidad: " + calidad + ", precio: " + precio + " RP";
 	}
 	
 }
