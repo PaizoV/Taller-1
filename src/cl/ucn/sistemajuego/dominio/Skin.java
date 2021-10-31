@@ -6,10 +6,21 @@ public class Skin {
 	private int precio;
 	private Personaje personaje;
 	
-	public Skin(String nombre, String calidad, int precio) {
+	public Skin(String nombre, String calidad) {
 		this.nombre = nombre;
 		this.calidad = calidad;
-		this.precio = precio;
+		switch (calidad) {
+		case "M":
+			precio = 3250;
+		case "D":
+			precio = 2750;
+		case "L":
+			precio = 1820;
+		case "E":
+			precio = 1350;
+		case "N":
+			precio = 975;
+		}
 	}
 
 	public String getNombre() {

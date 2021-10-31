@@ -33,7 +33,7 @@ public class SistemaJuegoImpl implements SistemaJuego {
 	}
 
 	@Override
-	public boolean ingresarSkin(String nombre, int costo, String calidad) {
+	public boolean ingresarSkin(String nombre, String calidad) {
 		// TODO Auto-generated method stub
 		return false;
 	}
