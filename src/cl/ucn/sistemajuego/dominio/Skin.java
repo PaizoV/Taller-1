@@ -4,6 +4,7 @@ public class Skin {
 	private String nombre;
 	private String calidad;
 	private int precio;
+	private Personaje personaje;
 	
 	public Skin(String nombre, String calidad, int precio) {
 		this.nombre = nombre;
@@ -33,6 +34,14 @@ public class Skin {
 
 	public void setPrecio(int precio) {
 		this.precio = precio;
+	}
+	
+	public Personaje getPersonaje() {
+		return personaje;
+	}
+	
+	public void setPersonaje(Personaje personaje) {
+		this.personaje = personaje;
 	}
 
 	@Override
