@@ -2,42 +2,50 @@ package cl.ucn.sistemajuego.logica;
 
 public interface SistemaJuego {
 
-	boolean ingresarPersonaje(String nombre, String rol);
+	public boolean ingresarPersonaje(String nombre,String rol);
 	
-	boolean ingresarCuenta(String nombreCuenta, String contrasena, String nick, int nivel,
-			double rp, String region);
+	public boolean ingresarCuenta(String nombreCuenta,String contrasena, String nick, 
+								  String region, int nivel, double rp);
 	
-	boolean asociarPersonajeCuenta(String nombreCuenta, String nombrePersonaje);
+	public boolean asociarPersonajeCuenta(String nombreCuenta,String nombrePersonaje);
 	
-	boolean ingresarSkin(String nombre, String calidad);
+	public boolean ingresarSkin(String nombre, int costo, String calidad);
 	
-	boolean asociarSkinPersonaje(String nombrePersonaje, String nombreSkin);
+	public boolean asociarSkinPersonaje(String nombrePersonaje, String nombreSkin);
 	
-	void asociarRecaudacion(double recaudacion, String nombrePersonaje);
+	public boolean asociarSkinPersonajeCuenta(String nombrePersonaje, String nombreSkin,
+											  String nombreCuenta);
 	
-	boolean validarCliente(String nombreCuenta, String contrasena);
+	public boolean asociarRecaudacion(double recaudacion, String nombrePersonaje);
 	
-	boolean comprarSkin(String nombrePersonaje, String nombreCuenta, String nombreSkin);
+	public boolean validarCliente(String nombreCuenta);
 	
-	boolean comprarPersonaje(String nombrePersonaje, String nombreCuenta);
+	public boolean validarAcceso(String nombreCuenta, String contrasena);
 	
-	String obtenerSkinsDisponibles(String nombreCuenta);
+	public void comprarSkin(String nombrePersonaje, String nombreCuenta, String nombreSkin);
 	
-	String obtenerInventario(String nombreCliente);
+	public boolean comprarPersonaje(String nombrePersonaje, String nombreCuenta);
 	
-	void recargarRp(String nombreCuenta, int cantidad);
+	public String obtenerSkinsDisponibles(String nombreCuenta);
 	
-	String obtenerDatosCuenta(String nombreCuenta);
+	public String obtenerInventario(String nombreCliente);
 	
-	void cambiarClave(String nombreCuenta, String claveNueva);
+	public void recargarRp(String nombreCuenta, int cantidad);
 	
-	double obtenerRecaudacionRol();
+	public String obtenerDatosCuenta(String nombreCuenta);
 	
-	double obtenerRecaudacionRegion();
+	public void cambiarClave(String nombreCuenta, String claveNueva);
 	
-	int obtenercantPersonajesRol();
+	public String  obtenerRecaudacionRol();
 	
-	void bloquearJugador(String nombreCuenta);
+	public String obtenerRecaudacionRegion();
 	
-	String obtenerInfoCuentas();
+	public String obtenerRecaudacionPersonaje();
+	
+	public String obtenerCantPersonajeRol();
+	
+	public void bloquearJugador(String nombreCuenta);
+	
+	public String obtenerInfoCuentas();
+	
 }
