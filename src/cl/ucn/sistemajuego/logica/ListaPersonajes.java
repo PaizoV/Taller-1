@@ -26,13 +26,13 @@ public class ListaPersonajes {
 		}
 	}
 	
-	public int buscarPersonaje(String nombre) {
+	public Personaje buscarPersonaje(String nombre) {
 		for (int i = 0; i < cantPersonajes; i++) {
 			if (lista[i].getNombre().equals(nombre)) {
-				return i;
+				return lista[i];
 			}
 		}
-		return -1;
+		return null;
 	}
 	
 	public boolean ingresarPersonaje(Personaje p) {

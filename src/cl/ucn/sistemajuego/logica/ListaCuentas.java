@@ -26,13 +26,13 @@ public class ListaCuentas {
 		}
 	}
 	
-	public int buscarCuenta(String nombreCuenta) {
+	public Cuenta buscarCuenta(String nombreCuenta) {
 		for (int i = 0; i < cantCuentas; i++) {
 			if (lista[i].getNombreCuenta().equals(nombreCuenta)) {
-				return i;
+				return lista[i];
 			}
 		}
-		return -1;
+		return null;
 	}
 	
 	public boolean ingresarCuenta(Cuenta c) {
@@ -43,6 +43,18 @@ public class ListaCuentas {
 		}
 		else {
 			return false;
+		}
+	}
+	//ORDENAMIENTO SEGUN NIVEL DE MAYOR A MENOR
+	public void ordenar() {
+		for( int i = 0; i < cantCuentas-1; i++) {
+			for( int j = i+1 ; j < cantCuentas ; j++ ) {
+				if(lista[i].getNivel() < lista[j].getNivel()) {
+					Cuenta aux = lista[i];
+					lista[i] = lista[j];
+					lista[j] = aux;
+				}
+			}
 		}
 	}
 }

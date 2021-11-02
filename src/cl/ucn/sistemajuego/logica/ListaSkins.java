@@ -26,13 +26,13 @@ public class ListaSkins {
 		}
 	}
 	
-	public int buscarSkin(String nombre) {
+	public Skin buscarSkin(String nombre) {
 		for (int i = 0; i < cantSkins; i++) {
 			if (lista[i].getNombre().equals(nombre)) {
-				return i;
+				return lista[i];
 			}
 		}
-		return -1;
+		return null;
 	}
 	
 	public boolean ingresarSkin(Skin s) {
