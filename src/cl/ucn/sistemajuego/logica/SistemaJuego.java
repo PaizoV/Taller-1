@@ -5,7 +5,7 @@ public interface SistemaJuego {
 	public boolean ingresarPersonaje(String nombre,String rol);
 	
 	public boolean ingresarCuenta(String nombreCuenta,String contrasena, String nick, 
-								  String region, int nivel, double rp);
+								  String region, int nivel, int rp);
 	
 	public boolean asociarPersonajeCuenta(String nombreCuenta,String nombrePersonaje);
 	
@@ -47,5 +47,7 @@ public interface SistemaJuego {
 	public void bloquearJugador(String nombreCuenta);
 	
 	public String obtenerInfoCuentas();
+
+	
 	
 }
