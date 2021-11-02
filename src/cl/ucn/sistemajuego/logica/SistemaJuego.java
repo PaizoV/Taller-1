@@ -9,7 +9,7 @@ public interface SistemaJuego {
 	
 	public boolean asociarPersonajeCuenta(String nombreCuenta,String nombrePersonaje);
 	
-	public boolean ingresarSkin(String nombre, int costo, String calidad);
+	public boolean ingresarSkin(String nombre, String calidad);
 	
 	public boolean asociarSkinPersonaje(String nombrePersonaje, String nombreSkin);
 	

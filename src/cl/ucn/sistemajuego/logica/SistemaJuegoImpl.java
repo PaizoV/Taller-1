@@ -1,5 +1,4 @@
 package cl.ucn.sistemajuego.logica;
-
 import cl.ucn.sistemajuego.dominio.*;
 
 public class SistemaJuegoImpl implements SistemaJuego {
@@ -49,7 +48,7 @@ public class SistemaJuegoImpl implements SistemaJuego {
 		}
 	}	
 	@Override
-	public boolean ingresarSkin(String nombre, int costo, String calidad) {
+	public boolean ingresarSkin(String nombre,String calidad) {
 		Skin skin = new Skin(nombre, calidad);
 		if(skins.ingresarSkin(skin)) {
 			return true;
@@ -93,8 +92,9 @@ public class SistemaJuegoImpl implements SistemaJuego {
 	@Override
 	public void comprarSkin(String nombrePersonaje, String nombreCuenta, String nombreSkin) {
 		Skin skin = skins.buscarSkin(nombreSkin);
-		Personaje personaje= personajes.buscarPersonaje(nombrePersonaje);
 		Cuenta cuenta = cuentas.buscarCuenta(nombreCuenta);
+		Personaje personaje= cuenta.getPersonajes().buscarPersonaje(nombrePersonaje);
+		
 		if(skin != null && personaje != null) {
 			ListaSkins listaSkins= cuenta.getSkins();
 			listaSkins.ingresarSkin(skin);
@@ -102,7 +102,8 @@ public class SistemaJuegoImpl implements SistemaJuego {
 			int  saldo= (int) cuenta.getRp();
 			saldo = saldo - price;
 			cuenta.setRp(saldo);
-			
+			double recaudacion = personaje.getRecaudacion() + (price*6.15);//nuevo
+			personaje.setRecaudacion(recaudacion);
 		}else {
 			throw new NullPointerException("El personaje y/o skin no existe");
 		}
@@ -195,8 +196,35 @@ public class SistemaJuegoImpl implements SistemaJuego {
 	//CAMBIO DE DOUBLE A STRING
 	@Override
 	public String obtenerRecaudacionRol() {
-		// TODO Auto-generated method stub
-		return null;
+		String salida="";
+		int contSup=0, contAdc=0, contTop=0, contMid=0, contJg=0;
+		
+		for(int i = 0; i < personajes.getCantPersonajes(); i++) {
+			Personaje personaje = personajes.getPersonajeAt(i);
+			switch (personaje.getRol()) {
+			case "SUP": 
+				contSup += personaje.getRecaudacion();
+				break;
+			case "ADC": 
+				contAdc += personaje.getRecaudacion();
+				break;
+			case "TOP": 
+				contTop += personaje.getRecaudacion();
+				break;
+			case "MID": 
+				contMid += personaje.getRecaudacion();
+				break;
+			case "JG": 
+				contJg += personaje.getRecaudacion();
+				break;
+			}
+		}
+		salida += "Recaudacion de personajes SUPORT (SUP): "+ contSup + "\n";
+		salida += "Recaudacion de personajes ATACK DAMAGE CARRY (ADC): "+ contAdc+ "\n";
+		salida += "Recaudacion de personajes TOP LANER (TOP): "+ contTop+ "\n";
+		salida += "Recaudacion de personajes MIDDLE LANER (MID): "+ contMid+ "\n";
+		salida += "Recaudacion de personajes JUNGLER (JG): "+ contJg;
+		return salida;
 	}
 	//CAMBIO DE DOUBLE A STRING
 	@Override
@@ -205,28 +233,34 @@ public class SistemaJuegoImpl implements SistemaJuego {
 		int contLas=0, contLan=0, contEuw=0, contKr=0, contNa=0, contRu=0;
 		for(int i = 0; i < cuentas.getCantCuentas(); i++) {
 			Cuenta cuenta = cuentas.getCuentaAt(i);
+			int recaudacionTotalPersonajes = cuenta.getPersonajes().recaudaciones();
 			switch (cuenta.getRegion()) {
 			case "LAS": 
-				
+				contLas += recaudacionTotalPersonajes;
 				break;
 			case "LAN": 
-				
+				contLan += recaudacionTotalPersonajes;
 				break;
 			case "EUW": 
-				
+				contEuw += recaudacionTotalPersonajes;
 				break;
 			case "KR": 
-				
+				contKr += recaudacionTotalPersonajes;
 				break;
 			case "NA": 
-				
+				contNa += recaudacionTotalPersonajes;
 				break;
 			case "RU": 
-				
+				contRu += recaudacionTotalPersonajes;
 				break;
 			}
 		}
-		
+		salida += "Recaudacion en la region LAS: "+ contLas + "\n";
+		salida += "Recaudacion en la region LAN: "+ contLan+ "\n";
+		salida += "Recaudacion en la region EUW: "+ contEuw+ "\n";
+		salida += "Recaudacion en la region KR: "+ contKr+ "\n";
+		salida += "Recaudacion en la region NA: "+ contNa+ "\n";
+		salida += "Recaudacion en la region RU: "+ contRu;
 		return salida;
 	}
 	//CAMBIO DE DOUBLE A STRING
