@@ -45,7 +45,13 @@ public class ListaPersonajes {
 			return false;
 		}
 	}
-	
+	public int recaudaciones() {
+		int recaudacion = 0;
+		for(int i=0; i<cantPersonajes ; i++) {
+			recaudacion += lista[i].getRecaudacion();
+		}
+		return recaudacion;
+	}
 	@Override
 	public String toString() {
 		String str = "";
