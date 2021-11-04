@@ -5,7 +5,7 @@ public interface SistemaJuego {
 	public boolean ingresarPersonaje(String nombre,String rol);
 	
 	public boolean ingresarCuenta(String nombreCuenta,String contrasena, String nick, 
-								  String region, int nivel, int rp);
+								  int nivel, int rp, String region);
 	
 	public boolean asociarPersonajeCuenta(String nombreCuenta,String nombrePersonaje);
 	
@@ -14,27 +14,41 @@ public interface SistemaJuego {
 	public boolean asociarSkinPersonaje(String nombrePersonaje, String nombreSkin);
 	
 	public boolean asociarSkinPersonajeCuenta(String nombrePersonaje, String nombreSkin,
-											  String nombreCuenta);
+			String nombreCuenta);
 	
-	public boolean asociarRecaudacion(double recaudacion, String nombrePersonaje);
+	public void asociarRecaudacion(double recaudacion, String nombrePersonaje);
 	
-	public boolean validarCliente(String nombreCuenta);
+	public boolean validarCliente(String nombreCuenta, String contrasena);
 	
-	public boolean validarAcceso(String nombreCuenta, String contrasena);
+	// Start new methods
+	boolean verificarPersonajesCuenta(String nombreCuenta);
 	
-	public void comprarSkin(String nombrePersonaje, String nombreCuenta, String nombreSkin);
+	String obtenerPersonajesCuenta(String nombreCuenta);
+	
+	boolean verificarSkinsPersonaje(String nombrePersonaje);
+	
+	String obtenerSkinsPersonaje(String nombreCuenta, String nombrePersonaje);
+	
+	boolean verificarSkinCuenta(String nombreCuenta, String nombreSkin);
+	
+	boolean verificarPersonajeCuenta(String nombreCuenta, String nombrePersonaje);
+	
+	boolean verificarContrasenaCuenta(String nombreCuenta, String contrasena);
+	
+	boolean verificarCoincidenciaContrasena(String contrasena1, String contrasena2);
+	// End new methods
+	
+	boolean comprarSkin(String nombreCuenta, String nombreSkin);
 	
 	public boolean comprarPersonaje(String nombrePersonaje, String nombreCuenta);
 	
 	public String obtenerSkinsDisponibles(String nombreCuenta);
 	
-	public String obtenerInventario(String nombreCliente);
+	public String obtenerInventario(String nombreCuenta);
 	
 	public void recargarRp(String nombreCuenta, int cantidad);
 	
 	public String obtenerDatosCuenta(String nombreCuenta);
-	
-	public void cambiarClave(String nombreCuenta, String claveNueva);
 	
 	public String  obtenerRecaudacionRol();
 	
@@ -47,7 +61,4 @@ public interface SistemaJuego {
 	public void bloquearJugador(String nombreCuenta);
 	
 	public String obtenerInfoCuentas();
-
-	
-	
 }

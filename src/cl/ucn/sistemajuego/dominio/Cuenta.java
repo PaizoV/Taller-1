@@ -12,6 +12,7 @@ public class Cuenta {
 	private ListaPersonajes personajes;
 	private ListaSkins skins;
 	private boolean estaBloqueado;
+	private int gasto;
 	
 	public Cuenta(String nombreCuenta, String contrasena, String nick, int nivel, int rp, 
 			String region) {
@@ -98,4 +99,11 @@ public class Cuenta {
 		this.estaBloqueado = estaBloqueado;
 	}
 	
+	public int getGasto() {
+		return gasto;
+	}
+	
+	public void setGasto(int gasto) {
+		this.gasto = gasto;
+	}
 }

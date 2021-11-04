@@ -28,7 +28,7 @@ public class ListaPersonajes {
 	
 	public Personaje buscarPersonaje(String nombre) {
 		for (int i = 0; i < cantPersonajes; i++) {
-			if (lista[i].getNombre().equals(nombre)) {
+			if (lista[i].getNombre().equalsIgnoreCase(nombre)) {
 				return lista[i];
 			}
 		}
@@ -45,13 +45,7 @@ public class ListaPersonajes {
 			return false;
 		}
 	}
-	public int recaudaciones() {
-		int recaudacion = 0;
-		for(int i=0; i<cantPersonajes ; i++) {
-			recaudacion += lista[i].getRecaudacion();
-		}
-		return recaudacion;
-	}
+	
 	@Override
 	public String toString() {
 		String str = "";
