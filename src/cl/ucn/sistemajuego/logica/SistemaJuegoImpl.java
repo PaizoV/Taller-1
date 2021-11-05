@@ -57,7 +57,7 @@ public class SistemaJuegoImpl implements SistemaJuego {
 	}
 	
 	@Override
-	public void asociarRecaudacion(double recaudacion, String nombrePersonaje) {
+	public void asociarRecaudacion(int recaudacion, String nombrePersonaje) {
 		Personaje personaje = personajes.buscarPersonaje(nombrePersonaje);
 		if (personaje != null) {
 			personaje.setRecaudacion(recaudacion);
@@ -72,6 +72,9 @@ public class SistemaJuegoImpl implements SistemaJuego {
 		Cuenta cuenta = cuentas.buscarCuenta(nombreCuenta);
 		if (cuenta == null) {
 			throw new NullPointerException("La cuenta no existe");
+		}
+		else if (cuenta.getBan()) {
+			throw new IllegalArgumentException("Usuario bloqueado");
 		}
 		else if (!cuenta.getContrasena().equals(contrasena) || !(nombreCuenta.equals("ADMIN")
 				&& contrasena.equals("ADMIN"))) {
@@ -107,39 +110,25 @@ public class SistemaJuegoImpl implements SistemaJuego {
 		return str.trim();
 	}
 	
-	// Retorna false si el personaje no tiene skins; retorna true si el prsonaje
-	// tiene al menos una skin.
 	@Override
-	public boolean verificarSkinsPersonaje(String nombrePersonaje) {
+	public String obtenerSkinsPersonaje(String nombreCuenta, String nombrePersonaje) {
+		Cuenta cuenta = cuentas.buscarCuenta(nombreCuenta);
 		Personaje personaje = personajes.buscarPersonaje(nombrePersonaje);
 		if (personaje == null) {
 			throw new NullPointerException("El personaje no existe");
 		}
 		else {
 			ListaSkins skinsPje = personaje.getSkins();
-			if (skinsPje.getCantSkins() == 0) {
-				return false;
+			ListaSkins skinsCuenta = cuenta.getSkins();
+			String str = "";
+			for (int i = 0; i < skinsPje.getCantSkins(); i++) {
+				Skin skin = skinsPje.getSkinAt(i);
+				if (skinsCuenta.buscarSkin(skin.getNombre()) == null) {
+					str += "- " + skin.getNombre() + "\n";
+				}
 			}
-			else {
-				return true;
-			}
-		}
-	}
-	
-	@Override
-	public String obtenerSkinsPersonaje(String nombreCuenta, String nombrePersonaje) {
-		Cuenta cuenta = cuentas.buscarCuenta(nombreCuenta);
-		Personaje personaje = personajes.buscarPersonaje(nombrePersonaje);
-		ListaSkins skinsPje = personaje.getSkins();
-		ListaSkins skinsCuenta = cuenta.getSkins();
-		String str = "";
-		for (int i = 0; i < skinsPje.getCantSkins(); i++) {
-			Skin skin = skinsPje.getSkinAt(i);
-			if (skinsCuenta.buscarSkin(skin.getNombre()) != null) {
-				str += "- " + skin.getNombre() + "\n";
-			}
-		}
-		return str.trim();
+			return str.trim();
+		}		
 	}
 	
 	@Override
@@ -176,6 +165,7 @@ public class SistemaJuegoImpl implements SistemaJuego {
 			return false;
 		}
 	}
+	
 	@Override
 	public boolean verificarPersonajeCuenta(String nombreCuenta, String nombrePersonaje) {
 		Cuenta cuenta = cuentas.buscarCuenta(nombreCuenta);
@@ -358,25 +348,22 @@ public class SistemaJuegoImpl implements SistemaJuego {
 		salida += "- NA: $ "+ cambioClp(contNa) + "\n";
 		return salida + "- RU: $ "+ cambioClp(contRu);
 	}
-	//CAMBIO DE DOUBLE A STRING
+	
 	@Override
 	public String obtenerRecaudacionPersonaje() {
 		String salida = "";
-		for(int i = 0; i < personajes.getCantPersonajes(); i++) {
+		for (int i = 0; i < personajes.getCantPersonajes(); i++) {
 			Personaje personaje = personajes.getPersonajeAt(i);
-			salida += "El personaje "+ personaje.getNombre();
-			double recaudacion = personaje.getRecaudacion(); //duda sobre conversion
-			salida+=" tuvo una recaudacion de "+ recaudacion + " CLP \n" ;
+			salida += "- " + personaje.getNombre() + ": $ " + 
+					cambioClp(personaje.getRecaudacion()) + " CLP\n";
 		}
-		return salida;
+		return salida.trim();
 	}
+	
 	@Override
-	//CAMBIO DE INT A STRING 
 	public String obtenerCantPersonajeRol() {
-		String salida="";
-		int contSup=0, contAdc=0, contTop=0, contMid=0, contJg=0;
-		
-		for(int i = 0; i < personajes.getCantPersonajes(); i++) {
+		int contSup = 0, contAdc = 0, contTop = 0, contMid = 0, contJg = 0;
+		for (int i = 0; i < personajes.getCantPersonajes(); i++) {
 			Personaje personaje = personajes.getPersonajeAt(i);
 			switch (personaje.getRol()) {
 			case "SUP": 
@@ -396,45 +383,41 @@ public class SistemaJuegoImpl implements SistemaJuego {
 				break;
 			}
 		}
-		salida += "Cantidad de personajes SUPORT (SUP): "+ contSup + "\n";
-		salida += "Cantidad de personajes ATACK DAMAGE CARRY (ADC): "+ contAdc+ "\n";
-		salida += "Cantidad de personajes TOP LANER (TOP): "+ contTop+ "\n";
-		salida += "Cantidad de personajes MIDDLE LANER (MID): "+ contMid+ "\n";
-		salida += "Cantidad de personajes JUNGLER (JG): "+ contJg;
-		return salida;
+		return "- SUP: " + contSup + "\n- ADC: " + contAdc + "\n- TOP: " + contTop +
+				"\n- MID: " + contMid + "\n- JG: " + contJg;
 	}
+	
 	@Override
 	public void bloquearJugador(String nombreCuenta) {
 		Cuenta cuenta = cuentas.buscarCuenta(nombreCuenta);
-		cuenta.setEstaBloqueado(true);
-		
-	}
-	@Override
-	public String obtenerInfoCuentas() {
-		String salida = "";
-		cuentas.ordenar();
-		for (int i = 0; i< cuentas.getCantCuentas(); i++) {
-			Cuenta cuenta = cuentas.getCuentaAt(i);
-			salida += cuenta.getNick() + " " + cuenta.getNivel() +"\n"; 
-		}
-		return salida;
-	}
-	
-	// nuevo
-	@Override
-	public boolean asociarSkinPersonajeCuenta(String nombrePersonaje, String nombreSkin, String nombreCuenta) {
-		Skin skin= skins.buscarSkin(nombreSkin);
-		Cuenta cuenta = cuentas.buscarCuenta(nombreCuenta);
-		Personaje personaje = cuenta.getPersonajes().buscarPersonaje(nombrePersonaje);
-		if( skin != null && personaje != null) {
-			personaje.getSkins().ingresarSkin(skin);
-			return true;
+		if (cuenta == null) {
+			throw new NullPointerException("La cuenta no existe");
 		}
 		else {
-			throw new NullPointerException("El personaje y/o skin no existe");
-		}
-		
-		
+			cuenta.setBan(true);;
+		}	
 	}
-
+	
+	@Override
+	public String obtenerCuentasOrdenadas() {
+		String salida = "";
+		cuentas.ordenar();
+		for (int i = 0; i < cuentas.getCantCuentas(); i++) {
+			Cuenta cuenta = cuentas.getCuentaAt(i);
+			salida += cuenta.getNick() + " - " + cuenta.getNivel() + "\n"; 
+		}
+		return salida.trim();
+	}
+	
+	@Override
+	public boolean asociarSkinCuenta(String nombreCuenta, String nombreSkin) {
+		Cuenta cuenta = cuentas.buscarCuenta(nombreCuenta);
+		Skin skin = skins.buscarSkin(nombreSkin);
+		if (cuenta == null || skin == null) {
+			throw new NullPointerException("La cuenta y/o skin no existe");
+		}
+		else {
+			return cuenta.getSkins().ingresarSkin(skin);
+		}
+	}
 }

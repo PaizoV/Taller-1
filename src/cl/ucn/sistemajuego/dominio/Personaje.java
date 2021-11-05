@@ -6,7 +6,7 @@ public class Personaje {
 	private String nombre;
 	private String rol;
 	private ListaSkins skins;
-	private double recaudacion;
+	private int recaudacion;
 	
 	public Personaje(String nombre, String rol) {
 		this.nombre = nombre;
@@ -39,11 +39,11 @@ public class Personaje {
 		this.skins = skins;
 	}
 
-	public double getRecaudacion() {
+	public int getRecaudacion() {
 		return recaudacion;
 	}
 
-	public void setRecaudacion(double recaudacion) {
+	public void setRecaudacion(int recaudacion) {
 		this.recaudacion = recaudacion;
 	}
 

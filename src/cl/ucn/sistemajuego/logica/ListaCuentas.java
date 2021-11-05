@@ -45,15 +45,21 @@ public class ListaCuentas {
 			return false;
 		}
 	}
-	//ORDENAMIENTO SEGUN NIVEL DE MAYOR A MENOR
+	
+	// Bubble sort by account's level
 	public void ordenar() {
-		for( int i = 0; i < cantCuentas-1; i++) {
-			for( int j = i+1 ; j < cantCuentas ; j++ ) {
-				if(lista[i].getNivel() < lista[j].getNivel()) {
-					Cuenta aux = lista[i];
-					lista[i] = lista[j];
-					lista[j] = aux;
+		for (int i = cantCuentas - 1; i > 0; i--) {
+			boolean noSwap = true;
+			for (int j = 0; j < i; j++) {
+				if (lista[j + 1].getNivel() > lista[j].getNivel()) {
+					Cuenta temp = lista[j];
+					lista[j] = lista[j + 1];
+					lista[j + 1] = temp;
+					noSwap = false;
 				}
+			}
+			if (noSwap) {
+				break;
 			}
 		}
 	}

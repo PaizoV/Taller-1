@@ -13,10 +13,9 @@ public interface SistemaJuego {
 	
 	public boolean asociarSkinPersonaje(String nombrePersonaje, String nombreSkin);
 	
-	public boolean asociarSkinPersonajeCuenta(String nombrePersonaje, String nombreSkin,
-			String nombreCuenta);
+	public boolean asociarSkinCuenta(String nombreCuenta, String nombreSkin);
 	
-	public void asociarRecaudacion(double recaudacion, String nombrePersonaje);
+	public void asociarRecaudacion(int recaudacion, String nombrePersonaje);
 	
 	public boolean validarCliente(String nombreCuenta, String contrasena);
 	
@@ -24,8 +23,6 @@ public interface SistemaJuego {
 	boolean verificarPersonajesCuenta(String nombreCuenta);
 	
 	String obtenerPersonajesCuenta(String nombreCuenta);
-	
-	boolean verificarSkinsPersonaje(String nombrePersonaje);
 	
 	String obtenerSkinsPersonaje(String nombreCuenta, String nombrePersonaje);
 	
@@ -60,5 +57,5 @@ public interface SistemaJuego {
 	
 	public void bloquearJugador(String nombreCuenta);
 	
-	public String obtenerInfoCuentas();
+	public String obtenerCuentasOrdenadas();
 }

@@ -11,7 +11,7 @@ public class Cuenta {
 	private String region;
 	private ListaPersonajes personajes;
 	private ListaSkins skins;
-	private boolean estaBloqueado;
+	private boolean ban;
 	private int gasto;
 	
 	public Cuenta(String nombreCuenta, String contrasena, String nick, int nivel, int rp, 
@@ -24,7 +24,7 @@ public class Cuenta {
 		this.region = region;
 		personajes = new ListaPersonajes();
 		skins = new ListaSkins(1000);
-		estaBloqueado = false;
+		ban = false;
 	}
 
 	public String getNombreCuenta() {
@@ -91,12 +91,12 @@ public class Cuenta {
 		this.skins = skins;
 	}
 
-	public boolean isEstaBloqueado() {
-		return estaBloqueado;
+	public boolean getBan() {
+		return ban;
 	}
 
-	public void setEstaBloqueado(boolean estaBloqueado) {
-		this.estaBloqueado = estaBloqueado;
+	public void setBan(boolean ban) {
+		this.ban = ban;
 	}
 	
 	public int getGasto() {
