@@ -1,0 +1,3 @@
+Jinx,ADC,2,Jinx Elfa Buena,N,Jinx guardiana estelar,L
+Sett,TOP,1,Sett Puño del dragon,E
+Lillia,JG,1,Lillia flor espiritual,E
