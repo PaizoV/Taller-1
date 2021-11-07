@@ -1,4 +1,7 @@
 package cl.ucn.sistemajuego.logica;
+import All.Cuenta;
+import All.Personaje;
+import All.Skin;
 import cl.ucn.sistemajuego.dominio.*;
 
 public class SistemaJuegoImpl implements SistemaJuego {
@@ -420,4 +423,58 @@ public class SistemaJuegoImpl implements SistemaJuego {
 			return cuenta.getSkins().ingresarSkin(skin);
 		}
 	}
+	@Override
+	public String obtenerTxtPersonajesActualizado() {
+		String salida = "";
+		for(int i=0; i<personajes.getCantPersonajes() ; i++) {
+			Personaje p = personajes.getPersonajeAt(i); 
+			String salida2 = ""; 
+			int cont =0;
+			salida+= p.getNombre()+","+p.getRol()+",";
+			for(int j=0; j<skins.getCantSkins() ; j++) {
+				Skin s = skins.getSkinAt(j);
+				if(s.getPersonaje().getNombre().equals(p.getNombre())) {
+					cont++;
+					salida2 += ","+s.getNombre()+","+s.getCalidad();
+				}
+			}
+			salida+=cont+salida2;
+			salida+="\n";
+		}
+		return salida;
+	}
+	@Override
+	public String obtenerTxtCuentasActualizado() {
+		String salida = "";
+		for(int i =0; i<cuentas.getCantCuentas(); i++) {
+			Cuenta c = cuentas.getCuentaAt(i);
+			salida+= c.getNombreCuenta()+","+c.getContrasena()+","+c.getNick();
+			salida+= ","+ c.getNivel() +"," + c.getRp();
+			salida+= ","+c.getPersonajes().getCantPersonajes();
+			for( int j = 0; j<c.getPersonajes().getCantPersonajes(); j++) {
+				Personaje p = c.getPersonajes().getPersonajeAt(j);
+				salida+= ","+ p.getNombre()+","+p.getSkins().getCantSkins();
+				for(int k=0; k<p.getSkins().getCantSkins();k++) {
+					Skin s = p.getSkins().getSkinAt(k);
+					salida+=","+s.getNombre();
+				}
+			}
+			salida+=","+c.getRegion();
+			salida+="\n";
+		}
+		return salida;
+	}
+	@Override
+	public String obtenerTxtEstadisticasActualizado() {
+		String salida = "";
+		//verificar la conversion de clp a rp
+		for(int i = 0; i< personajes.getCantPersonajes(); i++) {
+			Personaje p = personajes.getPersonajeAt(i);
+			salida += p.getNombre()+","+p.getRecaudacion();
+			salida+="\n";
+		}
+		return salida;
+	}
+}
+
 }

@@ -33,6 +33,13 @@ public interface SistemaJuego {
 	boolean verificarContrasenaCuenta(String nombreCuenta, String contrasena);
 	
 	boolean verificarCoincidenciaContrasena(String contrasena1, String contrasena2);
+	
+	String obtenerTxtPersonajesActualizado();
+	
+	String obtenerTxtCuentasActualizado();
+	
+	String obtenerTxtEstadisticasActualizado();
+	
 	// End new methods
 	
 	boolean comprarSkin(String nombreCuenta, String nombreSkin);
