@@ -1,2 +1,4 @@
-NotPepito,vegetta1111,PepitoGamer777,434,12000,2,Vex,1,Portadora del amanecer,Jhin,2,Oscuridad Cosmica,forajido,LAS
-FenrirXs,menorque3,Fenrir,430,2000,1,Kaisa,2,Kda All Out,Exterminador galactico,LAN
+NotPepito,PepitoGamer777,vegetta1111,434, 12000, 2,Vex,1,Portadora del amanecer,Jhin,2,Oscuridad Cosmica,forajido,LAS 
+FenrirXs,Fenrir, menorque3,430,2000,1, Kaisa,2,Kda All Out,Exterminador galactico,LAN
+PavloCrack,contrasenaLala,PavloGamer,69,102033,3,Lee Sin,1,STORM DRAGON LEE SIN,Ahri,1,Ahri Dinastica,Riven,1,Riven Hoja del Dragon,LAS
+Luisilla,lalala1,LuisillaGamer,9,2189,2,Miss Fortune,1,Miss Fortune Fiesta en la Piscina,Lee Sin,1,FPX LEE SIN,RU
