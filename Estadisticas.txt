@@ -1,2 +1,7 @@
-Sett,500000
-Jhin,600000
+Lee Sin,500000
+Jinx,40000
+Sett,600000
+Lillia,34000
+Ahri,56030
+Riven,234567
+Miss Fortune,99999
