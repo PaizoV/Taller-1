@@ -568,13 +568,17 @@ public class App {
 	public static void cerrarSistema(SistemaJuego sistema) throws IOException {
 		FileWriter writer = new FileWriter("Personajes.txt");
 		writer.write(sistema.obtenerTxtPersonajesActualizado());
+		writer.close();
 		
 		writer = new FileWriter("Cuentas.txt");
 		writer.write(sistema.obtenerTxtCuentasActualizado());
+		writer.close();
 		
 		writer = new FileWriter("Estadisticas.txt");
 		writer.write(sistema.obtenerTxtEstadisticasActualizado());
 		writer.close();
+		
+		System.exit(0);
 	}
 
 	public static void main(String[] args) throws IOException {

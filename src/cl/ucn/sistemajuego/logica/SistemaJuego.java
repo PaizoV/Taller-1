@@ -40,21 +40,12 @@ public interface SistemaJuego {
 	
 	boolean verificarContrasenaCuenta(String nombreCuenta, String contrasena);
 	
-<<<<<<< Updated upstream
-	boolean verificarCoincidenciaContrasena(String contrasena1, String contrasena2);
-	
-	String obtenerTxtPersonajesActualizado();
-	
-	String obtenerTxtCuentasActualizado();
-	
-=======
 	void cambiarContrasena(String nombreCuenta, String contrasena);
 	
 	String obtenerTxtPersonajesActualizado();
 
 	String obtenerTxtCuentasActualizado();
 
->>>>>>> Stashed changes
 	String obtenerTxtEstadisticasActualizado();
 	// End new methods
 	
