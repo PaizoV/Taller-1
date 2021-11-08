@@ -19,6 +19,17 @@ public class SistemaJuegoImpl implements SistemaJuego {
 	}
 	
 	@Override
+	public boolean verificarExistenciaPersonaje(String nombrePersonaje) {
+		Personaje personaje = personajes.buscarPersonaje(nombrePersonaje);
+		if (personaje == null) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	
+	@Override
 	public boolean ingresarCuenta(String nombreCuenta, String contrasena, String nick, 
 			int nivel, int rp, String region) {
 		Cuenta cuenta = new Cuenta(nombreCuenta, contrasena, nick, nivel, rp, region);
@@ -68,16 +79,26 @@ public class SistemaJuegoImpl implements SistemaJuego {
 	}
 	
 	@Override
+	public boolean verificarExistenciaCuenta(String nombreCuenta) {
+		Cuenta cuenta = cuentas.buscarCuenta(nombreCuenta);
+		if (cuenta == null) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	
+	@Override
 	public boolean validarCliente(String nombreCuenta, String contrasena) {
 		Cuenta cuenta = cuentas.buscarCuenta(nombreCuenta);
 		if (cuenta == null) {
-			throw new NullPointerException("La cuenta no existe");
+			throw new NullPointerException("Usuario no registrado");
 		}
 		else if (cuenta.getBan()) {
 			throw new IllegalArgumentException("Usuario bloqueado");
 		}
-		else if (!cuenta.getContrasena().equals(contrasena) || !(nombreCuenta.equals("ADMIN")
-				&& contrasena.equals("ADMIN"))) {
+		else if (!cuenta.getContrasena().equals(contrasena)) {
 			return false;
 		}
 		else {
@@ -167,6 +188,16 @@ public class SistemaJuegoImpl implements SistemaJuego {
 	}
 	
 	@Override
+	public String obtenerPersonajes() {
+		String salida = "";
+		for (int i = 0; i < personajes.getCantPersonajes(); i++) {
+			Personaje personaje = personajes.getPersonajeAt(i);
+			salida += "- " + personaje.getNombre() + "\n";
+		}
+		return salida.trim();
+	}
+	
+	@Override
 	public boolean verificarPersonajeCuenta(String nombreCuenta, String nombrePersonaje) {
 		Cuenta cuenta = cuentas.buscarCuenta(nombreCuenta);
 		Personaje personaje = personajes.buscarPersonaje(nombrePersonaje);
@@ -235,6 +266,12 @@ public class SistemaJuegoImpl implements SistemaJuego {
 	}
 	
 	@Override
+	public int obtenerRp(String nombreCuenta) {
+		Cuenta cuenta = cuentas.buscarCuenta(nombreCuenta);
+		return cuenta.getRp();
+	}
+	
+	@Override
 	public void recargarRp(String nombreCuenta, int cantidad) {
 		Cuenta cuenta = cuentas.buscarCuenta(nombreCuenta);
 		cuenta.setRp(cuenta.getRp() + cantidad);
@@ -274,8 +311,9 @@ public class SistemaJuegoImpl implements SistemaJuego {
 	}
 	
 	@Override
-	public boolean verificarCoincidenciaContrasena(String contrasena1, String contrasena2) {
-		return contrasena1.equals(contrasena2);
+	public void cambiarContrasena(String nombreCuenta, String contrasena) {
+		Cuenta cuenta = cuentas.buscarCuenta(nombreCuenta);
+		cuenta.setContrasena(contrasena);
 	}
 	
 	private double cambioClp(int recaudacion) {
@@ -307,11 +345,11 @@ public class SistemaJuegoImpl implements SistemaJuego {
 				break;
 			}
 		}
-		salida += "- SUP: $ " + cambioClp(contSup) + "\n";
-		salida += "- ADC: $ " + cambioClp(contAdc) + "\n";
-		salida += "- TOP: $ " + cambioClp(contTop) + "\n";
-		salida += "- MID: $ " + cambioClp(contMid) + "\n";
-		return salida + "- JG: $ " + cambioClp(contJg);
+		salida += "- SUP: $ " + cambioClp(contSup) + " CLP\n";
+		salida += "- ADC: $ " + cambioClp(contAdc) + " CLP\n";
+		salida += "- TOP: $ " + cambioClp(contTop) + " CLP\n";
+		salida += "- MID: $ " + cambioClp(contMid) + " CLP\n";
+		return salida + "- JG: $ " + cambioClp(contJg) + " CLP";
 	}
 	
 	@Override
@@ -341,12 +379,12 @@ public class SistemaJuegoImpl implements SistemaJuego {
 				break;
 			}
 		}
-		salida += "- LAS: $ "+ cambioClp(contLas) + "\n";
-		salida += "- LAN: $ "+ cambioClp(contLan) + "\n";
-		salida += "- EUW: $ "+ cambioClp(contEuw) + "\n";
-		salida += "- KR: $ "+ cambioClp(contKr) + "\n";
-		salida += "- NA: $ "+ cambioClp(contNa) + "\n";
-		return salida + "- RU: $ "+ cambioClp(contRu);
+		salida += "- LAS: $ "+ cambioClp(contLas) + " CLP\n";
+		salida += "- LAN: $ "+ cambioClp(contLan) + " CLP\n";
+		salida += "- EUW: $ "+ cambioClp(contEuw) + " CLP\n";
+		salida += "- KR: $ "+ cambioClp(contKr) + " CLP\n";
+		salida += "- NA: $ "+ cambioClp(contNa) + " CLP\n";
+		return salida + "- RU: $ "+ cambioClp(contRu) + " CLP";
 	}
 	
 	@Override
@@ -420,6 +458,7 @@ public class SistemaJuegoImpl implements SistemaJuego {
 			return cuenta.getSkins().ingresarSkin(skin);
 		}
 	}
+<<<<<<< Updated upstream
 	@Override
 	public String obtenerTxtPersonajesActualizado() {
 		String salida = "";
@@ -471,5 +510,68 @@ public class SistemaJuegoImpl implements SistemaJuego {
 			salida+="\n";
 		}
 		return salida;
+=======
+
+	@Override
+	public String obtenerTxtPersonajesActualizado() {
+		String salida = "";
+		for (int i = 0; i < personajes.getCantPersonajes(); i++) {
+			Personaje personaje = personajes.getPersonajeAt(i);
+			ListaSkins skinsPje = personaje.getSkins();
+			salida += personaje.getNombre() + "," + personaje.getRol() + ","
+					+ skinsPje.getCantSkins();
+			for (int j = 0; j < skinsPje.getCantSkins(); j++) {
+				Skin skin = skinsPje.getSkinAt(j);
+				salida += "," + skin.getNombre() + "," + skin.getCalidad();
+			}
+			salida += "\n";
+		}
+		return salida.trim();
+	}
+	
+	private ListaSkins obtenerSkinsPersonajeCuenta(Personaje personaje, ListaSkins skinsCuenta) {
+		ListaSkins skinsReturn = new ListaSkins(1000);
+		for (int i = 0; i < skinsCuenta.getCantSkins(); i++) {
+			Skin skin = skinsCuenta.getSkinAt(i);
+			if (skin.getPersonaje() == personaje) {
+				skinsReturn.ingresarSkin(skin);
+			}
+		}
+		return skinsReturn;
+	}
+
+	@Override
+	public String obtenerTxtCuentasActualizado() {
+		String salida = "";
+		for (int i = 0; i < cuentas.getCantCuentas(); i++) {
+			Cuenta cuenta = cuentas.getCuentaAt(i);
+			ListaPersonajes pjesCuenta = cuenta.getPersonajes();
+			ListaSkins skinsCuenta = cuenta.getSkins();
+			salida += cuenta.getNombreCuenta() + "," + cuenta.getContrasena() +
+					"," + cuenta.getNick() + "," + cuenta.getNivel() + "," + cuenta.getRp()
+					+ "," + pjesCuenta.getCantPersonajes();
+			for (int j = 0; j < pjesCuenta.getCantPersonajes(); j++) {
+				Personaje pje = pjesCuenta.getPersonajeAt(j);
+				ListaSkins skinsPje = obtenerSkinsPersonajeCuenta(pje, skinsCuenta);
+				salida += "," + pje.getNombre() + "," + skinsPje.getCantSkins();
+				for (int k = 0; k < skinsPje.getCantSkins(); k++) {
+					Skin skin = skinsPje.getSkinAt(k);
+					salida += "," + skin.getNombre();
+				}
+			}
+			salida += "," + cuenta.getRegion() + "\n";
+		}
+		return salida.trim();
+	}
+
+	@Override
+	public String obtenerTxtEstadisticasActualizado() {
+		String salida = "";
+		for (int i = 0; i < personajes.getCantPersonajes(); i++) {
+			Personaje personaje = personajes.getPersonajeAt(i);
+			salida += personaje.getNombre() + "," + personaje.getRecaudacion() + "\n";
+		}
+		return salida.trim();
+>>>>>>> Stashed changes
 	}
 }

@@ -20,6 +20,10 @@ public interface SistemaJuego {
 	public boolean validarCliente(String nombreCuenta, String contrasena);
 	
 	// Start new methods
+	boolean verificarExistenciaCuenta(String nombreCuenta);
+	
+	boolean verificarExistenciaPersonaje(String nombrePersonaje);
+	
 	boolean verificarPersonajesCuenta(String nombreCuenta);
 	
 	String obtenerPersonajesCuenta(String nombreCuenta);
@@ -28,16 +32,29 @@ public interface SistemaJuego {
 	
 	boolean verificarSkinCuenta(String nombreCuenta, String nombreSkin);
 	
+	String obtenerPersonajes();
+	
+	int obtenerRp(String nombreCuenta);
+	
 	boolean verificarPersonajeCuenta(String nombreCuenta, String nombrePersonaje);
 	
 	boolean verificarContrasenaCuenta(String nombreCuenta, String contrasena);
 	
+<<<<<<< Updated upstream
 	boolean verificarCoincidenciaContrasena(String contrasena1, String contrasena2);
 	
 	String obtenerTxtPersonajesActualizado();
 	
 	String obtenerTxtCuentasActualizado();
 	
+=======
+	void cambiarContrasena(String nombreCuenta, String contrasena);
+	
+	String obtenerTxtPersonajesActualizado();
+
+	String obtenerTxtCuentasActualizado();
+
+>>>>>>> Stashed changes
 	String obtenerTxtEstadisticasActualizado();
 	// End new methods
 	
