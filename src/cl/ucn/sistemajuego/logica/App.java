@@ -144,18 +144,22 @@ public class App {
 		case "1":
 			System.out.println("\n>--- RECAUDACION POR ROL ---<\n");
 			System.out.println(sistema.obtenerRecaudacionRol());
+			menuAdmin(sistema, scan);
 			break;
 		case "2":
 			System.out.println("\n>--- RECAUDACION POR REGION ---<\n");
 			System.out.println(sistema.obtenerRecaudacionRegion());
+			menuAdmin(sistema, scan);
 			break;
 		case "3":
 			System.out.println("\n>--- RECAUDACION POR PERSONAJE ---<\n");
 			System.out.println(sistema.obtenerRecaudacionPersonaje());
+			menuAdmin(sistema, scan);
 			break;
 		case "4":
 			System.out.println("\n>--- PERSONAJES POR ROL ---<\n");
 			System.out.println(sistema.obtenerCantPersonajeRol());
+			menuAdmin(sistema, scan);
 			break;
 		case "5":
 			agregarPersonaje(sistema, scan);
@@ -169,6 +173,7 @@ public class App {
 		case "8":
 			System.out.println("\n>--- CUENTAS POR NIVEL ---<\n");
 			System.out.println(sistema.obtenerCuentasOrdenadas());
+			menuAdmin(sistema, scan);
 			break;
 		case "9":
 			menuPrincipal(sistema, scan);
@@ -406,8 +411,8 @@ public class App {
 			String nombrePersonaje = scan.nextLine();
 			try {
 				System.out.println("\n# Skins disponible:\n");
-				sistema.obtenerSkinsPersonaje(nombreCuenta, nombrePersonaje);
-				System.out.print("Elije una skin: >>> ");
+				System.out.println(sistema.obtenerSkinsPersonaje(nombreCuenta, nombrePersonaje));
+				System.out.print("\nElije una skin: >>> ");
 				String nombreSkin = scan.nextLine();
 				try {
 					if (sistema.verificarSkinCuenta(nombreCuenta, nombreSkin)) {
@@ -439,7 +444,7 @@ public class App {
 		System.out.println("\n>--- COMPRAR PERSONAJE ---<\n");
 		System.out.println("# Personajes disponibles:\n");
 		System.out.println(sistema.obtenerPersonajes());
-		System.out.print("Elije un personaje: >>> ");
+		System.out.print("\nElije un personaje: >>> ");
 		String nombrePersonaje = scan.nextLine();
 		try {
 			if (sistema.verificarPersonajeCuenta(nombreCuenta, nombrePersonaje)) {
@@ -488,6 +493,7 @@ public class App {
 					continue;
 				}
 				else {
+					sistema.recargarRp(nombreCuenta, cantidad);
 					System.out.println("\n# Recarga exitosa! Nuevo saldo: " +
 							sistema.obtenerRp(nombreCuenta) + " RP");
 					break;

@@ -41,6 +41,7 @@ public class SistemaJuegoImpl implements SistemaJuego {
 		Cuenta cuenta = cuentas.buscarCuenta(nombreCuenta);
 		Personaje personaje = personajes.buscarPersonaje(nombrePersonaje);
 		if (cuenta != null && personaje != null) {
+			cuenta.setGasto(cuenta.getGasto() + 975);
 			return cuenta.getPersonajes().ingresarPersonaje(personaje);
 		}
 		else {
@@ -455,6 +456,7 @@ public class SistemaJuegoImpl implements SistemaJuego {
 			throw new NullPointerException("La cuenta y/o skin no existe");
 		}
 		else {
+			cuenta.setGasto(cuenta.getGasto() + skin.getPrecio());
 			return cuenta.getSkins().ingresarSkin(skin);
 		}
 	}
