@@ -1,7 +1,7 @@
 Lee Sin,TOP,3,STORM DRAGON LEE SIN,L,FPX LEE SIN,E,NIGHTBRINGER LEE SIN,M
-Jinx,ADC,2, Jinx Elfa Buena,N, Jinx guardiana estelar,L
-Sett,TOP,1, Sett Punio del dragon,E
-Lillia,JG,1, Lillia flor espiritual, E
+Jinx,ADC,2,Jinx Elfa Buena,N, Jinx guardiana estelar,L
+Sett,TOP,1,Sett Punio del dragon,E
+Lillia,JG,1,Lillia flor espiritual, E
 Ahri,SUP,2,Ahri Dinastica,L,Ahri Estrella del Pop,D
 Riven,SUP,2,Riven de Campeonato,E,Riven Hoja del Dragon,M
 Miss Fortune,ADC,2,Miss Fortune Recreativa,N,Miss Fortune Fiesta en la Piscina,E
